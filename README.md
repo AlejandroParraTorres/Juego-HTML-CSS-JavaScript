@@ -2,8 +2,8 @@
 
 Juego de preguntas y respuestas donde tendrás un tiempo limitado para responder X preguntas.
 
-. Cada pregunta respondida correctamente sumara +3 puntos
-. Cada pregunta respondida incorrectamente restara -1 punto
+* Cada pregunta respondida correctamente sumara +3 puntos
+* Cada pregunta respondida incorrectamente restara -1 punto
 
 El objetivo del juego es lograr la mayor puntuacion posible en el tiempo que se mostrará arriba.
 
