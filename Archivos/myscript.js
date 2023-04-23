@@ -145,7 +145,7 @@ function mostrarPregunta() {
   opciones = elecciones.querySelectorAll(".eleccion")
   let i = 0
   opciones.forEach(element => {
-    element.style.background="#d0d0d0"
+    element.style.backgroundColor="#d0d0d0";
     element.textContent = preguntas[numeroAleatorio].options[i];
     i++
   });
@@ -167,14 +167,14 @@ function comprobarRespuesta(identificador) {
       puntuacion+=3;
     }, 3000);
   }else{
-    if(puntuacion==0){
-      puntuacion=0
-    }else{
       setTimeout(() => {
         opcion.style.background="red";
-        puntuacion-=1;
+        if(puntuacion==0){
+          puntuacion=0
+        }else{
+          puntuacion-=1;
+        }
       }, 3000);
-    }
   }
 
   setTimeout(() => {
@@ -192,7 +192,8 @@ function comprobarRespuesta(identificador) {
   
 }
 
-function iniciarJuego(){
+function iniciarContador(){
+
   reloj=document.getElementById("timerSegundos")
   setInterval(() => {
     reloj.textContent= reloj.textContent-1;
@@ -209,13 +210,30 @@ function iniciarJuego(){
 
 
 function finalizarJuego() {
-  pregunta.textContent = `¡Juego terminado! Obtuviste ${puntuacion} puntos de ${preguntas.length} preguntas.`;
+  pregunta.textContent = `¡Juego terminado! Obtuviste ${puntuacion} puntos `;
   elecciones.innerHTML = "";
   progreso.textContent = "";
 }
 
-iniciarJuego()
-mostrarPregunta()
+
+function empezarJuego(){
+  
+  document.getElementsByClassName("instrucciones-contenedor")
+  botonComenzar=document.getElementById("startGame");
+  instruccionesContenedor= document.getElementById("instrucciones-contenedor")
+
+  botonComenzar.addEventListener('click', () => {
+    instruccionesContenedor.style.opacity = 0;
+    instruccionesContenedor.style.display = 'none';
+    iniciarContador()
+    mostrarPregunta()
+  });
+
+}
+
+empezarJuego();
+
+
 
 
 
