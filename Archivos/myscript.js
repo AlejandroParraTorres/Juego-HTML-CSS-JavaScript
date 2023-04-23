@@ -127,33 +127,102 @@ const preguntas = [
   }
 ]
 
-const pregunta=document.getElementById("pregunta")
+const pregunta = document.getElementById("pregunta")
 const elecciones = document.getElementById("elecciones");
 const progreso = document.getElementById("progreso");
 
 let numeroPreguntas = 0;
-let score = 0;
+let puntuacion = 0;
+let numeroAleatorio = 0;
 
-function mostrarPregunta(){
-  const numeroAleatorio = Math.floor(Math.random() * 21);
-  while(preguntas[numeroAleatorio].answered){
-    numeroAleatorio = Math.floor(Math.random() * 21);
+function mostrarPregunta() {
+  numeroAleatorio = Math.floor(Math.random() * 20);
+  while (preguntas[numeroAleatorio].answered) {
+    numeroAleatorio = Math.floor(Math.random() * 20);
   }
-  pregunta.textContent= preguntas[numeroAleatorio].question;
+  pregunta.textContent = preguntas[numeroAleatorio].question;
 
-  opciones=elecciones.querySelectorAll(".eleccion")
-  let i=0
+  opciones = elecciones.querySelectorAll(".eleccion")
+  let i = 0
   opciones.forEach(element => {
-    element.textContent= preguntas[numeroAleatorio].options[i];
+    element.style.background="#d0d0d0"
+    element.textContent = preguntas[numeroAleatorio].options[i];
     i++
   });
 
-  progreso.textContent= `Pregunta ${ numeroPreguntas + 1} de ${preguntas.length}`;
- 
+  progreso.textContent = `Pregunta ${numeroPreguntas + 1} de ${preguntas.length}`;
+
+}
+let final = 0;
+
+function comprobarRespuesta(identificador) {
+
+  const opcion = document.getElementById(identificador)
+  let respuestaSeleccionada = opcion.textContent;
+  console.log(numeroAleatorio)
+  let respuestaCorrecta=preguntas[numeroAleatorio].answer;
+  if(respuestaSeleccionada == respuestaCorrecta){
+    setTimeout(() => {
+      opcion.style.background="green";
+      puntuacion+=3;
+    }, 3000);
+  }else{
+    if(puntuacion==0){
+      puntuacion=0
+    }else{
+      setTimeout(() => {
+        opcion.style.background="red";
+        puntuacion-=1;
+      }, 3000);
+    }
+  }
+
+  setTimeout(() => {
+    preguntas[numeroAleatorio].answered = true;
+  final++
+  numeroPreguntas++;
+  if(final==20){
+    finalizarJuego()
+  }else
+
+  mostrarPregunta()
+
+    
+  }, 4000);
+  
+}
+
+function iniciarJuego(){
+  reloj=document.getElementById("timerSegundos")
+  setInterval(() => {
+    reloj.textContent= reloj.textContent-1;
+    if (reloj.textContent<=0) {
+      reloj.textContent=0;
+    }
+  }, 1000);
+  setTimeout(() => {
+    timeOver=document.getElementById("timeOver");
+    timeOver.style.display="inline"
+    finalizarJuego()
+  }, 120000);
 }
 
 
+function finalizarJuego() {
+  pregunta.textContent = `¡Juego terminado! Obtuviste ${puntuacion} puntos de ${preguntas.length} preguntas.`;
+  elecciones.innerHTML = "";
+  progreso.textContent = "";
+}
 
-mostrarPregunta();
+iniciarJuego()
+mostrarPregunta()
+
+
+
+
+
+
+
+
 
 

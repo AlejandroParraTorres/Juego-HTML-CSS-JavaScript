@@ -7,18 +7,27 @@
     <link rel="stylesheet" type="text/css" href="mycss.css">
   </head>
   <body>
+    <header>
+      <img id="imagen1" src="./Imagenes/timer.png" alt="Timer">
+      <p id="timerSegundos">120</p>
+    </header>
     <br><br><br>
+    <div id="instrucciones" style="display: none;">Instrucciones</div>
     <h1 id="titulo">¡Bienvenido a TrainYourMind!</h1>
     <div id="contenedor">
       <p id="pregunta"></p>
       <ul id="elecciones">
-        <li><button class="eleccion"></button></li>
-        <li><button class="eleccion"></button></li>
-        <li><button class="eleccion"></button></li>
-        <li><button class="eleccion"></button></li>
-        <li><button class="eleccion"></button></li>
+        <li><button id="eleccion1" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+        <li><button id="eleccion2" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+        <li><button id="eleccion3" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+        <li><button id="eleccion4" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+        <li><button id="eleccion5"onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
       </ul>
       <p id="progreso">Progreso</p>
+      <div id="timeOver" style="display: none;">
+          ¡Se ha agotado el tiempo! 
+          <button>Jugar de nuevo</button>
+      </div>
     </div>
   
     <script src="myscript.js"></script>

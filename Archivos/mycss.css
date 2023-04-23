@@ -1,8 +1,5 @@
 
 
-
-
-
 #contenedor {
     width: 80%;
     max-width: 800px;
@@ -71,4 +68,30 @@ h1 {
     text-align: right;
     color: #999;
 }
+
+
+
+header {
+    display: flex;
+    align-items: center;
+    max-width: 100px;
+    color: rgb(204, 101, 101);
+  }
+  
+  header h1 {
+    margin: 0;
+    font-size: 24px;
+  }
+  
+  header img {
+    height: 70px;
+    margin-right: 10px;
+  }
+  
+  header p {
+    margin: 0;
+    font-size: 50px;
+  }
+
+
 
