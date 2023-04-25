@@ -8,19 +8,32 @@
   </head>
   <body>
     <header>
-      <img id="imagen1" src="./Imagenes/timer.png" alt="Timer">
+      <div class="informacion-juego">
+        <img id="imagen1" src="./Imagenes/timer.png" alt="Timer">
       <p id="timerSegundos">120</p>
+      </div>
+      <div class="informacion-juego">
+        <p id="score">0 puntos</p>
+      <img src="./Imagenes/score.png" alt="Score">
+      </div>
+      
     </header>
-    <br><br><br>
+    <br><br><br><br><br><br><br>
     <div id="instrucciones-contenedor">
         <div id="instrucciones-inside">
           <h1>¡Bienvenido a TrainYourMind!</h1>
-          <p>Reglas del juego. </p>
+          <h2>Reglas del juego. </h2>
           <ul>
-            <li>Tienes 2 minutos para que finalize el juego</li>
+            <li>Tienes 2 minutos para responder a todas las preguntas</li>
             <li>Cada pregunta correcta suma +3 puntos</li> 
             <li>Cada pregunta incorrecta resta -1 punto</li>
             <li>Para seleccionar la respuesta usa "Click izquierdo"</li>
+          </ul>
+          <h2>Modo de dificultad</h2>
+          <ul id="modos-dificultad">
+            <li><input type="radio" name="modo" value="easy"> Fácil</li>
+            <li><input type="radio" name="modo" value="medium"> Medio</li>
+            <li><input type="radio" name="modo" value="hard"> Difícil</li>
           </ul>
           <button id="startGame">Jugar</button>
         </div>
