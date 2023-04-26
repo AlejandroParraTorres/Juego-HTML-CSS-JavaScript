@@ -59,8 +59,8 @@ const preguntasDificiles = [
     answer: "Principio de Fermat",
     answered: false
   },
-  {    
-    question: "¿Cuál es el nombre del proceso en el que una célula se divide en dos células hijas?",    
+  {
+    question: "¿Cuál es el nombre del proceso en el que una célula se divide en dos células hijas?",
     options: ["Meiosis", "Mitosis", "Citocinesis", "Apoptosis", "Endocitosis"],
     answer: "Mitosis",
     answered: false
@@ -248,7 +248,7 @@ const preguntasFaciles = [
     answer: "Monte Everest",
     answered: false
   }
-  
+
 ]
 
 const preguntasMedias = [
@@ -372,44 +372,45 @@ const preguntasMedias = [
     answer: "Cerebelo",
     answered: false
   }
-  
+
 ]
 
 const pregunta = document.getElementById("pregunta")
 const elecciones = document.getElementById("elecciones");
 const progreso = document.getElementById("progreso");
+const score = document.getElementById("score");
 
 let numeroPreguntas = 0;
 let puntuacion = 0;
 let numeroAleatorio = 0;
 let modoDificultad = "medium";
-let arrayPreguntas=[];
+let arrayPreguntas = [];
 
 
 function elegirDificultad() {
- 
-    const modos = document.getElementsByName("modo");
-    for (let i = 0; i < modos.length; i++) {
-      if (modos[i].checked) {
-        modoDificultad = modos[i].value;
-        break;
-      }
-    }
 
-    console.log(modoDificultad);
-    if (modoDificultad === "easy") {
-      arrayPreguntas = preguntasFaciles;
-    } else if (modoDificultad === "medium") {
-      arrayPreguntas = preguntasMedias;
-    } else if (modoDificultad === "hard") {
-      arrayPreguntas = preguntasDificiles;
+  const modos = document.getElementsByName("modo");
+  for (let i = 0; i < modos.length; i++) {
+    if (modos[i].checked) {
+      modoDificultad = modos[i].value;
+      break;
     }
-    
+  }
+
+  console.log(modoDificultad);
+  if (modoDificultad === "easy") {
+    arrayPreguntas = preguntasFaciles;
+  } else if (modoDificultad === "medium") {
+    arrayPreguntas = preguntasMedias;
+  } else if (modoDificultad === "hard") {
+    arrayPreguntas = preguntasDificiles;
+  }
+
 }
 
 function mostrarPregunta() {
 
-   
+
 
   return new Promise((resolve, reject) => {
     numeroAleatorio = Math.floor(Math.random() * 20);
@@ -489,18 +490,19 @@ function iniciarContador() {
 
 
 function finalizarJuego() {
+  
   clearInterval(intervalo);
   pregunta.textContent = `¡Juego terminado! Obtuviste ${puntuacion} puntos `;
-  localStorage.clear();
-  if (localStorage.length == 0) {
-    localStorage.setItem("jugador", JSON.stringify([]));
+
+  const puntuacionAnterior = localStorage.getItem("jugador") ? JSON.parse(localStorage.getItem("jugador")).puntos : 0;
+
+  if (puntuacion > puntuacionAnterior) {
+    jugador = {
+      puntos: puntuacion
+    };
+    localStorage.setItem("jugador", JSON.stringify(jugador));
+    score.textContent= puntuacion;
   }
-  jugador = {
-    puntos: puntuacion
-  };
-  productos = JSON.parse(localStorage.getItem("jugador"));
-  productos.push(jugador);
-  localStorage.setItem("jugador", JSON.stringify(jugador));
 
   elecciones.innerHTML = "";
   progreso.textContent = "";
@@ -508,12 +510,13 @@ function finalizarJuego() {
 
 
 function empezarJuego() {
-  
-  document.getElementsByClassName("instrucciones-contenedor")
+
   botonComenzar = document.getElementById("startGame");
   instruccionesContenedor = document.getElementById("instrucciones-contenedor")
 
   botonComenzar.addEventListener('click', () => {
+    puntuacionRecogida= localStorage.getItem("jugador") ? JSON.parse(localStorage.getItem("jugador")).puntos : 0;
+    score.textContent= "Last score " + puntuacionRecogida + " pts"
     instruccionesContenedor.style.opacity = 0;
     instruccionesContenedor.style.display = 'none';
     elegirDificultad();
