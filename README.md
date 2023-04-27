@@ -15,4 +15,4 @@ Existen tres niveles de dificultad:
 
 En cada nivel se presentarán dististas preguntes acorde a la dificultad elegida.
 
-Durante el juego, el usuario tendra un numero limitado de ventajas que le ayudarán a resolver el juego. Se guardará la puntuacioón en el LocalStorage y siempre se recogerá la mejor puntuación.
+Durante el juego, el usuario tendra un numero limitado de ventajasque se podrán activar si el usuario hace "click derecho" sobre la pantalla y que le ayudarán a resolver el juego. Se guardará la puntuacioón en el LocalStorage y siempre se recogerá la mejor puntuación.
