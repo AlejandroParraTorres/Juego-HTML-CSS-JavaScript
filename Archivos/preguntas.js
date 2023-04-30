@@ -121,8 +121,14 @@ const preguntasDificiles = [
   },
   {
     question: "¿Qué evento de JavaScript se produce cuando una promesa es rechazada?",
-    options: ["onerror", "onreject", "onfailure", "oncatch", "nop existe tal evento"],
-    answer: "nop existe tal evento",
+    options: ["onerror", "onreject", "onfailure", "oncatch", "No existe tal evento"],
+    answer: "No existe tal evento",
+    answered: false
+  },
+  {
+    question: "¿Quién es el mejor equipo del mundo?",
+    options: ["FC Barcelona", "Real Betis", "Real Madrid", "Atletico de Madrid", "Rayo Vallecano"],
+    answer: "Real Madrid",
     answered: false
   }
 ]

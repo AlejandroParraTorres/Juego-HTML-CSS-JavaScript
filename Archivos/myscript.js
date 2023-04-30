@@ -5,13 +5,17 @@ const pregunta = document.getElementById("pregunta")
 const elecciones = document.getElementById("elecciones");
 const progreso = document.getElementById("progreso");
 const score = document.getElementById("score");
+const habilidad1 = document.getElementById("habilidad1");
+const habilidad2 = document.getElementById("habilidad2");
 
 let numeroPreguntas = 0;
 let puntuacion = 0;
 let numeroAleatorio = 0;
-let modoDificultad="medium";
+let modoDificultad = "medium";
 let arrayPreguntas = [];
-let seleccionado=false;
+let seleccionado = false;
+let habilidad1Activada = false;
+let habilidad2Activada = false;
 
 
 function elegirDificultad() {
@@ -20,7 +24,7 @@ function elegirDificultad() {
   for (let i = 0; i < modos.length; i++) {
     if (modos[i].checked) {
       modoDificultad = modos[i].value;
-      seleccionado=true;
+      seleccionado = true;
       break;
     }
   }
@@ -35,16 +39,50 @@ function elegirDificultad() {
 
 }
 
-function mostrarPregunta() {
+function comprobarHabilidad1(){
+  document.addEventListener("keydown",function(event){
+    if(event.key=" " && !habilidad1Activada){
+      habilidad1Activada=true;
+      habilidad1.style.display="none";
+      clearInterval(intervalo);
+      const opcion = elecciones.querySelectorAll("button");
+      respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
+      
+      setTimeout(() => {
+        for (let i = 0; i < opcion.length; i++) {
+          if(opcion[i].textContent == respuestaCorrecta){
+            opcion[i].style.backgroundColor="green"
+            puntuacion += 3;
+          }   
+        } 
+      }, 3000);
+  
+      setTimeout(() => {
+        iniciarContador();
+        arrayPreguntas[numeroAleatorio].answered = true;
+        final++
+        numeroPreguntas++;
+        if (final == 20) {
+          finalizarJuego()
+        } else
+          mostrarPregunta()
+      }, 4000);
+    }
+   
+  })
 
+}
+
+function mostrarPregunta() {
   return new Promise((resolve, reject) => {
+    comprobarHabilidad1();
     numeroAleatorio = Math.floor(Math.random() * 20);
     while (arrayPreguntas[numeroAleatorio].answered) {
       numeroAleatorio = Math.floor(Math.random() * 20);
     }
     pregunta.textContent = arrayPreguntas[numeroAleatorio].question;
 
-    opciones = elecciones.querySelectorAll(".eleccion")
+    opciones = elecciones.querySelectorAll("button")
     let i = 0
     opciones.forEach(element => {
       element.style.backgroundColor = "#d0d0d0";
@@ -61,11 +99,9 @@ function mostrarPregunta() {
 let final = 0;
 
 function comprobarRespuesta(identificador) {
-
   clearInterval(intervalo);
   const opcion = document.getElementById(identificador)
   let respuestaSeleccionada = opcion.textContent;
-  console.log(numeroAleatorio)
   let respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
   if (respuestaSeleccionada == respuestaCorrecta) {
     setTimeout(() => {
@@ -91,10 +127,7 @@ function comprobarRespuesta(identificador) {
     if (final == 20) {
       finalizarJuego()
     } else
-
       mostrarPregunta()
-
-
   }, 4000);
 
 }
@@ -115,7 +148,7 @@ function iniciarContador() {
 
 
 function finalizarJuego() {
-  
+
   clearInterval(intervalo);
   pregunta.textContent = `¡Juego terminado! Obtuviste ${puntuacion} puntos `;
 
@@ -126,18 +159,18 @@ function finalizarJuego() {
       puntos: puntuacion
     };
     localStorage.setItem("jugador", JSON.stringify(jugador));
-    score.textContent= puntuacion;
+    score.textContent = puntuacion;
   }
   reiniciarJuego();
   elecciones.innerHTML = "";
   progreso.textContent = "";
 }
 
-function reiniciarJuego(){
-  mensajeFinal= document.getElementById("reiniciarJuego")
-  mensajeFinal.style.display="inline-block";
-  let botonReiniciar=document.getElementById("reiniciar");
-  botonReiniciar.addEventListener("click",()=>{
+function reiniciarJuego() {
+  mensajeFinal = document.getElementById("reiniciarJuego")
+  mensajeFinal.style.display = "inline-block";
+  let botonReiniciar = document.getElementById("reiniciar");
+  botonReiniciar.addEventListener("click", () => {
     location.reload();
   })
 
@@ -155,18 +188,18 @@ function empezarJuego() {
       alert("Por favor, selecciona una dificultad antes de comenzar el juego.");
       return;
     }
-    puntuacionRecogida= localStorage.getItem("jugador") ? JSON.parse(localStorage.getItem("jugador")).puntos : 0;
-    score.textContent= "Last Score " + puntuacionRecogida + " pts"
-    
+    puntuacionRecogida = localStorage.getItem("jugador") ? JSON.parse(localStorage.getItem("jugador")).puntos : 0;
+    score.textContent = "Last Score " + puntuacionRecogida + " pts"
+
     instruccionesContenedor.style.opacity = 0;
     instruccionesContenedor.style.display = 'none';
-    
-    mostrarPregunta().then(() => {iniciarContador() });
+
+    mostrarPregunta().then(() => { iniciarContador() });
   });
 
 }
 
- 
+
 
 
 empezarJuego();
