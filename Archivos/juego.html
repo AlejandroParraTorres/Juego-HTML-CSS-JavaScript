@@ -1,60 +1,69 @@
 <!DOCTYPE html>
 <html lang="es">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Trivial</title>
-    <link rel="stylesheet" type="text/css" href="mycss.css">
-  </head>
-  <body>
-    <header>
-      <div class="informacion-juego">
-        <img id="imagen1" src="./Imagenes/timer.png" alt="Timer">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TrainYourGame</title>
+  <link rel="stylesheet" type="text/css" href="mycss.css">
+</head>
+
+<body>
+  <header>
+    <div class="informacion-juego">
+      <img id="imagen1" src="./Imagenes/timer.png" alt="Timer">
       <p id="timerSegundos">120</p>
-      </div>
-      <div class="informacion-juego">
-        <p id="score">0 pts</p>
+    </div>
+    <div class="habilidades">
+      <img src="./Imagenes/habilidad1.png" alt="Primera habilidad">
+      <img src="./Imagenes/habilidad2.png" alt="Segunda habilidad">
+    </div>
+    <div class="informacion-juego">
+      <p id="score">0 pts</p>
       <img src="./Imagenes/score.png" alt="Score">
-      </div>
-      
-    </header>
-    <br><br><br><br><br><br><br>
-    <div id="instrucciones-contenedor">
-        <div id="instrucciones-inside">
-          <h1>¡Bienvenido a TrainYourMind!</h1>
-          <h2>Reglas del juego. </h2>
-          <ul>
-            <li>Tienes 2 minutos para responder a todas las preguntas</li>
-            <li>Cada pregunta correcta suma +3 puntos</li> 
-            <li>Cada pregunta incorrecta resta -1 punto</li>
-            <li>Para seleccionar la respuesta usa "Click izquierdo"</li>
-          </ul>
-          <h2>Modo de dificultad</h2>
-          <ul id="modos-dificultad">
-            <li><input type="radio" name="modo" value="easy"> Fácil</li>
-            <li><input type="radio" name="modo" value="medium"> Medio</li>
-            <li><input type="radio" name="modo" value="hard"> Difícil</li>
-          </ul>
-          <button id="startGame">Jugar</button>
-        </div>
     </div>
-    <div id="contenedor">
-      <p id="pregunta"></p>
-      <ul id="elecciones">
-        <li><button id="eleccion1" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
-        <li><button id="eleccion2" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
-        <li><button id="eleccion3" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
-        <li><button id="eleccion4" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
-        <li><button id="eleccion5"onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+
+  </header>
+  <br><br><br><br><br><br><br>
+  <div id="instrucciones-contenedor">
+    <div id="instrucciones-inside">
+      <h1>¡Bienvenido a TrainYourMind!</h1>
+      <h2>Reglas del juego. </h2>
+      <ul>
+        <li>Tienes 2 minutos para responder a todas las preguntas</li>
+        <li>Cada pregunta correcta suma +3 puntos</li>
+        <li>Cada pregunta incorrecta resta -1 punto</li>
+        <li>Para seleccionar la respuesta usa "Click izquierdo"</li>
       </ul>
-      <p id="progreso">Progreso</p>
-      <div id="timeOver" style="display: none;">
-          ¡Se ha agotado el tiempo! 
-          <button>Jugar de nuevo</button>
-      </div>
+      <h2>Modo de dificultad</h2>
+      <ul id="modos-dificultad">
+        <li><input type="radio" name="modo" value="easy"> Fácil</li>
+        <li><input type="radio" name="modo" value="medium"> Medio</li>
+        <li><input type="radio" name="modo" value="hard"> Difícil</li>
+      </ul>
+      <button id="startGame">Jugar</button>
     </div>
-  
-    <script src="myscript.js"></script>
-  </body>
-  
+  </div>
+  <div id="contenedor">
+    <p id="pregunta"></p>
+    <ul id="elecciones">
+      <li><button id="eleccion1" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+      <li><button id="eleccion2" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+      <li><button id="eleccion3" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+      <li><button id="eleccion4" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+      <li><button id="eleccion5" onclick="comprobarRespuesta(id)" class="eleccion"></button></li>
+    </ul>
+    <div id="reiniciarJuego" style="display:none;">
+      <p>¡Espero que hayas aprendido y sobre todo que hayas disfrutado!</p>
+      <img src="" alt="">
+      <button id="reiniciar">Volver a jugar</button>
+    </div>
+    <p id="progreso">Progreso</p>
+  </div>
+
+
+  <script src="preguntas.js"></script>
+  <script src="myscript.js"></script>
+</body>
+
 </html>
