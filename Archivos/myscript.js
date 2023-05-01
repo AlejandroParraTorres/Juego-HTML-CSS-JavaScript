@@ -40,34 +40,34 @@ function elegirDificultad() {
 
 }
 
-function comprobarHabilidad1(){
-  document.addEventListener("keydown",function(event){
-    if(event.key === ' ' && !habilidad1Activada){
-      habilidad1Activada=true;
-      habilidad1.style.display="none";
+function comprobarHabilidad1() {
+  document.addEventListener("keydown", function (event) {
+    if (event.key === ' ' && !habilidad1Activada) {
+      habilidad1Activada = true;
+      habilidad1.style.display = "none";
       clearInterval(intervalo);
       const opcion = elecciones.querySelectorAll("button");
       respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
       opcion.forEach(element => {
-        if(element.textContent == respuestaCorrecta){
-           parpadear = setInterval(() => {
+        if (element.textContent == respuestaCorrecta) {
+          parpadear = setInterval(() => {
             element.style.backgroundColor = element.style.backgroundColor === 'orange' ? 'white' : 'orange';
           }, 300);
-        }else{
-          element.disabled=true;
+        } else {
+          element.disabled = true;
         }
       });
 
       setTimeout(() => {
         for (let i = 0; i < opcion.length; i++) {
-          if(opcion[i].textContent == respuestaCorrecta){
+          if (opcion[i].textContent == respuestaCorrecta) {
             clearInterval(parpadear)
-            opcion[i].style.backgroundColor="green"
+            opcion[i].style.backgroundColor = "green"
             puntuacion += 3;
-          }   
-        } 
+          }
+        }
       }, 3000);
-  
+
       setTimeout(() => {
         iniciarContador();
         arrayPreguntas[numeroAleatorio].answered = true;
@@ -79,47 +79,47 @@ function comprobarHabilidad1(){
           mostrarPregunta()
       }, 4000);
     }
-   
+
   })
 
 }
 
-function comprobarHabilidad2(){
-  document.addEventListener("contextmenu",function(event){
+function comprobarHabilidad2() {
+  document.addEventListener("contextmenu", function (event) {
     event.preventDefault();
-    if(event.button === 2 && !habilidad2Activada){
-      habilidad2Activada=true;
+    if (event.button === 2 && !habilidad2Activada) {
+      habilidad2Activada = true;
       event.preventDefault();
-      habilidad2.style.display="none";
+      habilidad2.style.display = "none";
       const opcion = elecciones.querySelectorAll("button");
       respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
       for (let i = 0; i < 3; i++) {
-        eleccionDesactivada=Math.floor(Math.random() * 5);
-        while(opcion[eleccionDesactivada].textContent == respuestaCorrecta || opcion[eleccionDesactivada].disabled == true){
-          eleccionDesactivada=Math.floor(Math.random() * 5);
+        eleccionDesactivada = Math.floor(Math.random() * 5);
+        while (opcion[eleccionDesactivada].textContent == respuestaCorrecta || opcion[eleccionDesactivada].disabled == true) {
+          eleccionDesactivada = Math.floor(Math.random() * 5);
         }
         console.log(eleccionDesactivada);
-        opcion[eleccionDesactivada].disabled=true;
+        opcion[eleccionDesactivada].disabled = true;
       }
-      
+
     }
   })
 }
 
 function mostrarPregunta() {
   return new Promise((resolve, reject) => {
-    numeroAleatorio = Math.floor(Math.random() * 20);
+    numeroAleatorio = Math.floor(Math.random() * 21);
     comprobarHabilidad1();
     comprobarHabilidad2();
     while (arrayPreguntas[numeroAleatorio].answered) {
-      numeroAleatorio = Math.floor(Math.random() * 20);
+      numeroAleatorio = Math.floor(Math.random() * 21);
     }
     pregunta.textContent = arrayPreguntas[numeroAleatorio].question;
 
     opciones = elecciones.querySelectorAll("button")
     let i = 0
     opciones.forEach(element => {
-      element.disabled=false;
+      element.disabled = false;
       element.style.backgroundColor = "#d0d0d0";
       element.textContent = arrayPreguntas[numeroAleatorio].options[i];
       i++
@@ -139,12 +139,12 @@ function comprobarRespuesta(identificador) {
   opciones = elecciones.querySelectorAll("button")
   let respuestaSeleccionada = opcion.textContent;
   opciones.forEach(element => {
-    if(element.textContent != respuestaSeleccionada){
-      element.disabled=true;
+    if (element.textContent != respuestaSeleccionada) {
+      element.disabled = true;
     }
   });
   let respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
-    parpadear = setInterval(() => {
+  parpadear = setInterval(() => {
     opcion.style.backgroundColor = opcion.style.backgroundColor === 'orange' ? 'white' : 'orange';
   }, 300);
   if (respuestaSeleccionada == respuestaCorrecta) {

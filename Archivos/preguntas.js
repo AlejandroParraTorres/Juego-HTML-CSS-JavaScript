@@ -253,6 +253,12 @@ const preguntasFaciles = [
     options: ["Monte Everest", "Monte Kilimanjaro", "Monte Aconcagua", "Monte Denali", "Monte Vinson"],
     answer: "Monte Everest",
     answered: false
+  },
+  {
+    question: "¿Dónde se encuentra el estadio Spotify Camp Nou?",
+    options: ["Barcelona", "Sevilla", "Extremadura", "Madrid", "Valencia"],
+    answer: "Barcelona",
+    answered: false
   }
 
 ]
@@ -376,6 +382,12 @@ const preguntasMedias = [
     question: "¿Cuál es el nombre de la estructura en el cerebro que se encarga del control de los movimientos y la coordinación?",
     options: ["Cerebelo", "Hipotálamo", "Tálamo", "Lóbulo frontal", "Lóbulo parietal"],
     answer: "Cerebelo",
+    answered: false
+  },
+  {
+    question: "¿Cuál es el resultado de la expresión '10' + 20?",
+    options: ["1020", "30", "Error", "10200", "NaN"],
+    answer: "1020",
     answered: false
   }
 
