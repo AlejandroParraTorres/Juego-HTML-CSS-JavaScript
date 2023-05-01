@@ -16,6 +16,7 @@ let arrayPreguntas = [];
 let seleccionado = false;
 let habilidad1Activada = false;
 let habilidad2Activada = false;
+let parpadear;
 
 
 function elegirDificultad() {
@@ -41,16 +42,26 @@ function elegirDificultad() {
 
 function comprobarHabilidad1(){
   document.addEventListener("keydown",function(event){
-    if(event.key=" " && !habilidad1Activada){
+    if(event.key === ' ' && !habilidad1Activada){
       habilidad1Activada=true;
       habilidad1.style.display="none";
       clearInterval(intervalo);
       const opcion = elecciones.querySelectorAll("button");
       respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
-      
+      opcion.forEach(element => {
+        if(element.textContent == respuestaCorrecta){
+           parpadear = setInterval(() => {
+            element.style.backgroundColor = element.style.backgroundColor === 'orange' ? 'white' : 'orange';
+          }, 300);
+        }else{
+          element.disabled=true;
+        }
+      });
+
       setTimeout(() => {
         for (let i = 0; i < opcion.length; i++) {
           if(opcion[i].textContent == respuestaCorrecta){
+            clearInterval(parpadear)
             opcion[i].style.backgroundColor="green"
             puntuacion += 3;
           }   
@@ -73,10 +84,33 @@ function comprobarHabilidad1(){
 
 }
 
+function comprobarHabilidad2(){
+  document.addEventListener("contextmenu",function(event){
+    event.preventDefault();
+    if(event.button === 2 && !habilidad2Activada){
+      habilidad2Activada=true;
+      event.preventDefault();
+      habilidad2.style.display="none";
+      const opcion = elecciones.querySelectorAll("button");
+      respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
+      for (let i = 0; i < 3; i++) {
+        eleccionDesactivada=Math.floor(Math.random() * 5);
+        while(opcion[eleccionDesactivada].textContent == respuestaCorrecta || opcion[eleccionDesactivada].disabled == true){
+          eleccionDesactivada=Math.floor(Math.random() * 5);
+        }
+        console.log(eleccionDesactivada);
+        opcion[eleccionDesactivada].disabled=true;
+      }
+      
+    }
+  })
+}
+
 function mostrarPregunta() {
   return new Promise((resolve, reject) => {
-    comprobarHabilidad1();
     numeroAleatorio = Math.floor(Math.random() * 20);
+    comprobarHabilidad1();
+    comprobarHabilidad2();
     while (arrayPreguntas[numeroAleatorio].answered) {
       numeroAleatorio = Math.floor(Math.random() * 20);
     }
@@ -85,6 +119,7 @@ function mostrarPregunta() {
     opciones = elecciones.querySelectorAll("button")
     let i = 0
     opciones.forEach(element => {
+      element.disabled=false;
       element.style.backgroundColor = "#d0d0d0";
       element.textContent = arrayPreguntas[numeroAleatorio].options[i];
       i++
@@ -101,15 +136,26 @@ let final = 0;
 function comprobarRespuesta(identificador) {
   clearInterval(intervalo);
   const opcion = document.getElementById(identificador)
+  opciones = elecciones.querySelectorAll("button")
   let respuestaSeleccionada = opcion.textContent;
+  opciones.forEach(element => {
+    if(element.textContent != respuestaSeleccionada){
+      element.disabled=true;
+    }
+  });
   let respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
+    parpadear = setInterval(() => {
+    opcion.style.backgroundColor = opcion.style.backgroundColor === 'orange' ? 'white' : 'orange';
+  }, 300);
   if (respuestaSeleccionada == respuestaCorrecta) {
     setTimeout(() => {
+      clearInterval(parpadear)
       opcion.style.background = "green";
       puntuacion += 3;
     }, 3000);
   } else {
     setTimeout(() => {
+      clearInterval(parpadear);
       opcion.style.background = "red";
       if (puntuacion == 0) {
         puntuacion = 0
