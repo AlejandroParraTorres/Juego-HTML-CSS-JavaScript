@@ -41,6 +41,9 @@ function elegirDificultad() {
 }
 
 function comprobarHabilidad1() {
+  if(habilidad1Activada== true){
+    return ;
+  }
   document.addEventListener("keydown", function (event) {
     if (event.key === ' ' && !habilidad1Activada) {
       habilidad1Activada = true;
@@ -120,6 +123,9 @@ function mostrarPregunta() {
     let i = 0
     opciones.forEach(element => {
       element.disabled = false;
+      element.onclick= function(){
+        comprobarRespuesta(element.id);
+      };
       element.style.backgroundColor = "#d0d0d0";
       element.textContent = arrayPreguntas[numeroAleatorio].options[i];
       i++
@@ -141,6 +147,8 @@ function comprobarRespuesta(identificador) {
   opciones.forEach(element => {
     if (element.textContent != respuestaSeleccionada) {
       element.disabled = true;
+    }else{
+      element.onclick=null;
     }
   });
   let respuestaCorrecta = arrayPreguntas[numeroAleatorio].answer;
@@ -166,14 +174,13 @@ function comprobarRespuesta(identificador) {
   }
 
   setTimeout(() => {
-    iniciarContador();
     arrayPreguntas[numeroAleatorio].answered = true;
     final++
     numeroPreguntas++;
     if (final == 20) {
       finalizarJuego()
     } else
-      mostrarPregunta()
+    mostrarPregunta().then(() => { iniciarContador() });
   }, 4000);
 
 }
