@@ -17,4 +17,8 @@ En cada nivel se presentarán dististas preguntes acorde a la dificultad elegida
 
 Durante el juego, el usuario tendra un numero limitado de ventajas que se podrán activar si el usuario hace "click derecho" sobre la pantalla o pulsa la tecla "espacio" y que le ayudarán a resolver el juego. Se guardará la puntuacioón en el LocalStorage y siempre se recogerá la mejor puntuación.
 
------------- ¿Que elementos utilizare en el juego? ------------
+------------ ¿Que elementos utilizaré en el juego? ------------
+* Uso de promesas -> Para devolver resolve() para volver a iniciar el reloj
+* Uso de setTimeOut() y setInterval() -> Para manejar el tiempo del juego, animar un objeto haciendo que parpadee y controlando partes de codigo para que se ejecuten más en adelante
+* Uso de localStorage() -> Para almacenar la puntuación del jugador y recuperarla
+* Eventos de teclado y raton -> Tengo dos eventos de raton y uno de teclado. Con click izquierdo para seleccionar una opcion y con click derecho para activar una de las bonificaciones. Con la barra espaciadora se activa la segunda bonificacion.
