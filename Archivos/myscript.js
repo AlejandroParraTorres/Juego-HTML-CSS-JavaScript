@@ -123,8 +123,9 @@ function mostrarPregunta() {
     let i = 0
     opciones.forEach(element => {
       element.disabled = false;
-      element.onclick= function(){
-        comprobarRespuesta(element.id);
+      element.onclick= function(event){
+        event.stopPropagation();
+        comprobarRespuesta(event.target.id);
       };
       element.style.backgroundColor = "#d0d0d0";
       element.textContent = arrayPreguntas[numeroAleatorio].options[i];
