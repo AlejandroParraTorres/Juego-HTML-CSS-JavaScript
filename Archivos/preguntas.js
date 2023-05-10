@@ -4,6 +4,8 @@
 
 //INICIO CODIGO DEL JUEGO
 
+const coloresCarta=["#B64040","#59721F","#31A9A9","#6D8AB6","#7558B2","#D093DF","#8A266D"]
+
 const preguntasDificiles = [
   {
     question: "¿Cuál es la cantidad máxima de vértices que puede tener un poliedro convexo con caras triangulares?",

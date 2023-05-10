@@ -67,11 +67,22 @@ h1 {
   background-color: rgb(255, 136, 0) !important;
 }
 
+#divProgreso{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
 #progreso {
   margin-top: 2em;
   font-size: 1.5em;
-  text-align: right;
   color: #999;
+}
+
+#puntuacion{
+  margin-top: 2em;
+  font-size: 1.5em;
+  color: #000000;
 }
 
 
@@ -166,7 +177,6 @@ header p {
   font-size: 1.5rem;
   background-color: #4CAF50;
   color: #fff;
-
   border: #328f3d 2px solid;
   border-radius: 0.5rem;
   cursor: pointer;
