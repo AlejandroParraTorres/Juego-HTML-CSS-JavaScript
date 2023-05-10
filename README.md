@@ -22,3 +22,4 @@ Durante el juego, el usuario tendra un numero limitado de ventajas que se podrá
 * Uso de setTimeOut() y setInterval() -> Para manejar el tiempo del juego, animar un objeto haciendo que parpadee y controlando partes de codigo para que se ejecuten más en adelante
 * Uso de localStorage() -> Para almacenar la puntuación del jugador y recuperarla
 * Eventos de teclado y raton -> Tengo dos eventos de raton y uno de teclado. Con click izquierdo para seleccionar una opcion y con click derecho para activar una de las bonificaciones. Con la barra espaciadora se activa la segunda bonificacion.
+* Uso del stopPropagation() -> Para evitar que cuando el usuario pulse la eleccion se cambie el color de la carta de la pregunta
